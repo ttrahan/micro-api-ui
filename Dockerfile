@@ -1,4 +1,4 @@
-FROM aye0aye/micro-image:flat.1
+FROM sdemo/micro-image:prod
 
 # this folder must be created in the base images
 ADD . /root/micro-api/
