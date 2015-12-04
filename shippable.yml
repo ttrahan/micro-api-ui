@@ -16,7 +16,9 @@ before_install:
 script:
     - mkdir -p ./shippable/buildoutput
     - echo $BUILD_NUMBER
+    - pwd
     - echo $BUILD_NUMBER > ./shippable/buildoutput/config.txt
+    - cat ./shippable/buildoutput/config.txt
     - grunt
 
 after_script:
