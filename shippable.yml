@@ -14,13 +14,9 @@ before_install:
     - mkdir -p ./shippable/codecoverage
 
 script:
-    - mkdir -p ./shippable/buildoutput
-    - echo $BUILD_NUMBER
-    - pwd
-    - echo $BUILD_NUMBER > ./shippable/buildoutput/config.txt
-    - cat ./shippable/buildoutput/config.txt
     - grunt
 
 after_script:
     - ./node_modules/.bin/istanbul cover grunt -- -u tdd
     - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
+    - echo $BUILD_NUMBER > ~/buildConfig.txt
