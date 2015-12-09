@@ -1,4 +1,4 @@
-FROM sdemo/micro-image:prod
+FROM 288971733297.dkr.ecr.us-east-1.amazonaws.com/micro-image:master.4
 
 # this folder must be created in the base images
 ADD . /root/micro-api/
