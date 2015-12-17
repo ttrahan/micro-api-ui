@@ -32,7 +32,7 @@ logger.add(winston.transports.Console,
 
 routes(app);
 
-var PORT = process.env.API_PORT;
+var PORT = process.env.API_PORT || '80';
 
 // listen
 app.listen(PORT,
