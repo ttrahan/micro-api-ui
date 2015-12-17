@@ -1,4 +1,4 @@
-# micro-api! Updated
+# micro-api demo application
 
 API for simple nodejs micro service that expose two routes / & /info!!!
 
