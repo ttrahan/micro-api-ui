@@ -20,10 +20,10 @@ env:
     - AWS_DOCKER_CONFIG=dockerconfig.$ACCOUNT_IDENTIFIER.$AWS_EB_APPLICATION
     # encrypted variable for AWS_ACCESS_KEY_ID, unique to each Shippable project
     # you must generate your own hash within Shippable project settings
-    - secure: DJVb1fX1kJID5oymfAbEY+hxwEiHOvoDGncAjiO+7YRS5Tph5o7PLJRjAUJRPSlON8Nsd9tmhjKVmxE1NGZT8H/ZOtfGUS08LsfoFnMHooPpAJW9xTUqSljmVpXsMHG7jByMUp/KX68LbqYnsug/E1JmxjB/NugGuNihoWbiDOqNo6OItavunGeerUnl/u7Sb8nbyZNWTaTRVDyjeKYPDOH5uiMdj2NR0r4v3kQfYG7XyTG96qZCW/BYtGmyLU4LoXqaElf8AZIK7OM0wxpDmQezocnNArTHcbqmo02Dgwc2BXxR/1eHfnJJ3i4vu7x39fsFZa/B1m/AqZzhEyO6NQ==
+    - secure: juUc3I5SJp2J6sH6Cu7hMmYnlOcPQmTRi7BnWvlq+0CAve1wrYzh5IWqgP/VowIsWCu5wCOfTnbWBXQeoznJUYfbI+A/voZailWLR8/ydWs3j/ZI93f6acSYwpysKMZ/uRSRqRKT5ubXNduz0E+sm/wP68rgJ/M7A7cZoJ9YGhDTN7dkQfXK6ycfM3GsUXuhd3ZxA1DU+Hmbb7VxZOmliuh2hE4QDLO/j+hiIpAKSdi+FzDtxXLpDvOt6evMWiNtQT2aywYN13sV71dsOOZKX80wX1sHJ+5msw796Pt3Swq9wPFdvOSs/VGQdSU+PbYMLDfFjGmAVp8ocj4Iz4DTtg==
     # encrypted variable for AWS_SECRET_ACCESS_KEY, unique to each Shippable project
     # you must generate your own hash within Shippable project settings
-    - secure: OHs9N+h4p8UkFaL4Afh1PplPqajdQntgTHHUXigUl2SZA1WsIayoviREPLM5BZVrvvJb6FkfAVucgXHHuBSXgU/rjhNPAmHMD3iM5+o9iBxa4EiAPWEjHrHn6+vURSSsEZ3wbR4yZaQ+5dacWEqLVSBUDg7+YqQBQ+ybFJbf2rMqPAA1CczNzFiT3ZqFFSXpQM+kNn4c53d588jQcW2eVsnhufh3TX/5b7QrxU1VC2oS35nYqn3dExfRDxXUThMk0d0iQRLSpWgIuQ1QuOTKgMdNcAGqpURGM8UY8oc3FscAwvPVZoBCcOq5QgDoij1lHYmVw0NFNN9AGmtE0ii0JA==
+    - secure: kI7YFxRLLqx6A/jgoD+qXOnBNBUHMfQFay4E7RNuF14DcwnbOwkl86fd6kOm9UfbXPgs/ln6oSNxeFZf0kT1W9mGNmjjQZ08Lz1vFYziCFcS6CYEgcqr8mwlUq+z39KzNarAfrL2nMqmcloecdgGmrb9+ANzoR0MD83pFidAOvyk667aSChr6bccLOW2nyqLu558T0vglCyIJYQu+V8bi0Sbd6xvQ+Tn4wGyzn4QwTOUvm3cwro7nGgh3uA83RcdKxT5mN1n7GYXgbYRo+FUb8bRip68gJ/TKrtnUCxfvu6qjOjH642htq7kJRowyJljggcQt/7HSFp8egJxOxVRLA==
 
 build:
   pre_ci:
