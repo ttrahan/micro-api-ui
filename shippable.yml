@@ -6,8 +6,9 @@ node_js:
   - 0.10.33
 
 env:
-  - XUNIT_FILE=./shippable/testresults/result.xml API_PORT=80
   global:
+    - XUNIT_FILE=./shippable/testresults/result.xml
+    - API_PORT=80
     - AWS_EB_APPLICATION=aye0aye # existing EB application name
     - AWS_EB_ENVIRONMENT=micro-api # existing EB environment name
     - AWS_S3_BUCKET=aye0aye # existing S3 bucket that allows EB access
@@ -43,7 +44,6 @@ build:
     - npm install
     - grunt
   post_ci:
-    #
     - ./node_modules/.bin/istanbul cover grunt -- -u tdd
     - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
     - echo $BUILD_NUMBER > ~/buildConfig.txt
