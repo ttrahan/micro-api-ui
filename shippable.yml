@@ -57,9 +57,9 @@ build:
     - aws elasticbeanstalk update-environment --environment-name $AWS_EB_ENVIRONMENT --version-label $ACCOUNT_IDENTIFIER.$AWS_EB_APPLICATION.$BRANCH.$BUILD_NUMBER --region=$AWS_REGION
 
 integrations:
-    hub:
-      - integrationName: "Docker Hub"
-        type: docker
-        branches:
-          only:
-            - amazon-elastic-beanstalk
+  hub:
+    - integrationName: "Docker Hub"
+      type: docker
+      branches:
+        only:
+          - amazon-elastic-beanstalk
