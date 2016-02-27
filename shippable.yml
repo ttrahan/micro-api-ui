@@ -44,6 +44,10 @@ build:
     - npm install
     - grunt
   post_ci:
+<<<<<<< HEAD
+=======
+    #
+>>>>>>> origin/amazon-elastic-beanstalk
     - ./node_modules/.bin/istanbul cover grunt -- -u tdd
     - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
     - echo $BUILD_NUMBER > ~/buildConfig.txt
