@@ -9,6 +9,8 @@ env:
   global:
     - XUNIT_FILE=./shippable/testresults/result.xml
     - API_PORT=80
+    - DEBUG_LEVEL=error
+    - SHUD_LOG_TO_FILE=true
     - AWS_EB_APPLICATION=aye0aye # existing EB application name
     - AWS_EB_ENVIRONMENT=micro-api # existing EB environment name
     - AWS_S3_BUCKET=aye0aye # existing S3 bucket that allows EB access
@@ -31,7 +33,7 @@ build:
     - node --version
     - mkdir -p ./shippable/testresults
     - mkdir -p ./shippable/codecoverage
-    - SUDO=$(which sudo) && $SUDO pip install --upgrade awscli
+    - SUDO=$(which sudo) && $SUDO pip install awscli
   pre_ci_boot:
     image_name: $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION
     image_tag: latest
@@ -49,7 +51,7 @@ build:
     - echo $BUILD_NUMBER > ~/buildConfig.txt
     - docker tag -f $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION:latest $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION:$BRANCH.$BUILD_NUMBER
     - docker push $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION:$BRANCH.$BUILD_NUMBER
-    - cat Dockerrun.aws.json | sed "s/<IMAGE_NAME>/$REGISTRY_ACCOUNT\/$AWS_EB_APPLICATION/" | sed "s/<TAG>/$BRANCH.$BUILD_NUMBER/" | sed "s/<DOCKER_CONFIG>/$AWS_EB_APPLICATION\/$AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER/" > $AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER
+    - cat Dockerrun.aws.json | sed "s/<IMAGE_NAME>/$REGISTRY_ACCOUNT\/$AWS_EB_APPLICATION/" | sed "s/<TAG>/$BRANCH.$BUILD_NUMBER/" | sed "s/<API_PORT>/$API_PORT"| sed "s/<DEBUG_LEVEL>/$DEBUG_LEVEL"| sed "s/<SHUD_LOG_TO_FILE>/$SHUD_LOG_TO_FILE"| sed "s/<DOCKER_CONFIG>/$AWS_EB_APPLICATION\/$AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER/" > $AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER
     - aws s3 cp $AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER s3://$AWS_S3_BUCKET/$AWS_S3_FOLDER/$AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER --region=$AWS_REGION
     - aws s3 cp /root/.docker/config.json s3://$AWS_S3_BUCKET/$AWS_S3_FOLDER/$AWS_DOCKER_CONFIG.$BRANCH.$BUILD_NUMBER --region=$AWS_REGION
     - aws elasticbeanstalk create-application-version --application-name $AWS_EB_APPLICATION --version-label $ACCOUNT_IDENTIFIER.$AWS_EB_APPLICATION.$BRANCH.$BUILD_NUMBER --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=$AWS_S3_FOLDER/$AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER --region=$AWS_REGION
