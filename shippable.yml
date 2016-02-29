@@ -64,4 +64,4 @@ integrations:
         type: docker
         branches:
           only:
-            - amazon-elastic-beanstalk
+            - amazon-eb-cli-beta
