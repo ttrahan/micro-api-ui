@@ -12,7 +12,7 @@ env:
     - DEBUG_LEVEL=error
     - SHUD_LOG_TO_FILE=true
     - AWS_EB_APPLICATION=aye0aye # existing EB application name
-    - AWS_EB_ENVIRONMENT=micro-api # existing EB environment name
+    - AWS_EB_ENVIRONMENT=micro-api-beta # existing EB environment name
     - AWS_S3_BUCKET=aye0aye # existing S3 bucket that allows EB access
     - AWS_S3_FOLDER=$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT # S3 folder to use
     - AWS_REGION=us-east-1 # AWS region to deploy into
