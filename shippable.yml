@@ -34,8 +34,8 @@ build:
     - ./node_modules/.bin/istanbul cover grunt -- -u tdd
     - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
     - echo $BUILD_NUMBER > ~/buildConfig.txt
-    - docker tag -f $REGISTRY_ACCOUNT/$AWS_EB_ENVIRONMENT:latest $REGISTRY_ACCOUNT/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
-    - docker push $REGISTRY_ACCOUNT/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
+    - docker tag -f $REGISTRY_ACCOUNT/$AWS_EB_ENVIRONMENT:latest $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
+    - docker push $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
     - cat Dockerrun.aws.json | sed "s/<IMAGE_NAME>/$REGISTRY_ACCOUNT\/$AWS_EB_ENVIRONMENT/" | sed "s/<TAG>/$BRANCH.$BUILD_NUMBER/" | sed "s/<DOCKER_CONFIG>/$AWS_EB_APPLICATION\/$AWS_EB_ENVIRONMENT\/$AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER/" > $AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER
 
 integrations:
