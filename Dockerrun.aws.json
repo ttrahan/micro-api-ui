@@ -9,20 +9,6 @@
     "ContainerPort": "80"
   }
 ],
-"environment": [
-  {
-    "name": "API_PORT",
-    "value": "<API_PORT>"
-  },
-  {
-    "name": "DEBUG_LEVEL",
-    "value": "<DEBUG_LEVEL>"
-  },
-  {
-    "name": "SHUD_LOG_TO_FILE",
-    "value": "<SHUD_LOG_TO_FILE>"
-  }
-],
 "Authentication": {
   "Bucket": "shippable-demo-eb",
   "Key": "<DOCKER_CONFIG>"
