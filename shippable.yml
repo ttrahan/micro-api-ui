@@ -10,20 +10,17 @@ env:
     - XUNIT_FILE=./shippable/testresults/result.xml
     - AWS_EB_APPLICATION=aye0aye # existing EB application name
     - AWS_EB_ENVIRONMENT=micro-api-beta # existing EB environment name
-    - AWS_REGION=us-east-1 # AWS region to deploy into
     - REGISTRY_ACCOUNT=288971733297.dkr.ecr.us-east-1.amazonaws.com # image registry account name, e.g. Docker Hub account
     - ACCOUNT_IDENTIFIER=shippable.$REGISTRY_ACCOUNT
-    - AWS_DEPLOY_JSON=Dockerrun.aws.json.$ACCOUNT_IDENTIFIER.$AWS_EB_APPLICATION
-    - AWS_DOCKER_CONFIG=dockerconfig.$ACCOUNT_IDENTIFIER.$AWS_EB_APPLICATION
 
 build:
   pre_ci:
-    - docker build -t $REGISTRY_ACCOUNT/$AWS_EB_ENVIRONMENT:latest .
+    - docker build -t $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:latest .
     - node --version
     - mkdir -p ./shippable/testresults
     - mkdir -p ./shippable/codecoverage
   pre_ci_boot:
-    image_name: $REGISTRY_ACCOUNT/$AWS_EB_ENVIRONMENT
+    image_name: $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT
     image_tag: latest
     pull: false
     options: --privileged=true
@@ -34,9 +31,11 @@ build:
     - ./node_modules/.bin/istanbul cover grunt -- -u tdd
     - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
     - echo $BUILD_NUMBER > ~/buildConfig.txt
-    - docker tag -f $REGISTRY_ACCOUNT/$AWS_EB_ENVIRONMENT:latest $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
+    - docker tag -f $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:latest $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
     - docker push $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
-    - cat Dockerrun.aws.json | sed "s/<IMAGE_NAME>/$REGISTRY_ACCOUNT\/$AWS_EB_ENVIRONMENT/" | sed "s/<TAG>/$BRANCH.$BUILD_NUMBER/" | sed "s/<DOCKER_CONFIG>/$AWS_EB_APPLICATION\/$AWS_EB_ENVIRONMENT\/$AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER/" > $AWS_DEPLOY_JSON.$BRANCH.$BUILD_NUMBER
+    - export EBS_IMAGE_TAG=$BRANCH.$BUILD_NUMBER
+    - export EBS_IMAGE_NAME=$REGISTRY_ACCOUNT/$IMAGE_NAME
+    - export EBS_VERSION=$ACCOUNT_IDENTIFIER.$IMAGE_NAME.$BRANCH.$BUILD_NUMBER
 
 integrations:
     hub:
