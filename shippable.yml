@@ -12,8 +12,6 @@ env:
     - AWS_EB_ENVIRONMENT=micro-api-beta # existing EB environment name
     - REGISTRY_ACCOUNT=288971733297.dkr.ecr.us-east-1.amazonaws.com # image registry account name, e.g. Docker Hub account
     - ACCOUNT_IDENTIFIER=shippable.$REGISTRY_ACCOUNT
-    - secure: euyE5IvruqRPJOjlHjeGONW6MHfwYAq9IBu6cCpavtpTHN8+V7rOEonnjhg4BmSueRPinaGXUtW4NkIKdsafo4zPSrl5prEyQYUX94codbrEhgjFyr2LtSgyFljmJDg71jCJMPGbtthJtRM8dmb0F8lBJD/kGEeU/P2bZv8bxtpuS3/x8UzdbB4j5BWmnIUzCzf2nI/CFx/DJnUwCod+2AMP9xy5ABpq7lBd+K63Zz9T7SYaAEQon3v8en+IgoVFHKrPvaxvtGLxAuVS/ISLlDa5oIZXAo/0KVUz3YgZ/Lr8O1H3HK8xuGIGLfpGZvQBy0cpMy/v34Uw6fg69gYzew==
-    - secure: hYY6wtIqjBxyUJIZ53It4Zo/JNjtQEvVjAPfCSGlHltfu3AIgyVxIFn3I/q8TOKNjMH/K9nxiQlttMYlj5ZjXC0Pz4zNYvPZ/d7mNlZ3SZ87lbpPOd2hwzyGCDTmLfEG5eeSXvYsx2EuSoffiMLAexXpMwhQ/RWJZHJvxmLa6YaZigg0702F6FVj82aadS3uuMVzFgadZ7JcYAedUUctxkBQ9EBfh5LvD0RrkIRzOoXOIP4zwd3+W5381Xr1p3iIYSjdNZKUNiiu9j9ngCHfi21eb9sYCQQSl+FKYMesEnmt5iBdKNzH/Kzr0xI2p9crkjLQMajmCJOFDuRhb8BewQ==
 
 build:
   pre_ci:
@@ -33,9 +31,6 @@ build:
     - ./node_modules/.bin/istanbul cover grunt -- -u tdd
     - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
     - echo $BUILD_NUMBER > ~/buildConfig.txt
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - $(aws ecr get-login --region us-east-1)
     - docker tag -f $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:latest $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
     - docker push $REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT:$BRANCH.$BUILD_NUMBER
     - export EBS_IMAGE_TAG=$BRANCH.$BUILD_NUMBER
@@ -46,6 +41,7 @@ integrations:
     hub:
       - integrationName: "Amazon ECR - ttrahan"
         type: ecr
+        agent_only: false
         branches:
           only:
             - amazon-eb-ui-beta
