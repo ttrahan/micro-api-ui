@@ -25,9 +25,9 @@ build:
     pull: false
     options: --privileged=true
   ci:
-    - export EBS_IMAGE_TAG=$BRANCH.$BUILD_NUMBER
-    - export EBS_IMAGE_NAME=$REGISTRY_ACCOUNT/$IMAGE_NAME
-    - export EBS_VERSION=$ACCOUNT_IDENTIFIER.$IMAGE_NAME.$BRANCH.$BUILD_NUMBER
+    - export EBS_IMAGE_TAG=$BRANCH.$BUILD_NUMBER && echo $EBS_IMAGE_TAG
+    - export EBS_IMAGE_NAME=$REGISTRY_ACCOUNT/$AWS_EB_APPLICATION/$AWS_EB_ENVIRONMENT && echo $EBS_IMAGE_NAME
+    - export EBS_VERSION=$ACCOUNT_IDENTIFIER.$IMAGE_NAME.$BRANCH.$BUILD_NUMBER && echo $EBS_VERSION
     - npm install
     - grunt
   post_ci:
