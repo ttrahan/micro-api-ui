@@ -25,19 +25,10 @@ This microservice uses info and error messages only.
 Before beginning, create a new application and environment in Elastic Beanstalk
 using [the instructions available here](https://aws.amazon.com/elasticbeanstalk/getting-started/).
 
-In the shippable.yml, change the following values based on your EB application:
+In the shippable.yml, change the following values, as needed, based on your EB application:
 - AWS_EB_APPLICATION:_yourElasticBeanstalkApplicationName_
 - AWS_EB_ENVIRONMENT=_yourElasticBeanstalkEnvironmentName_
-- AWS_S3_BUCKET=_yourS3BucketName_
-- AWS_S3_FOLDER=_yourS3FolderName_ to upload deployment config files
-- AWS_REGION=_yourPreferredAwsRegion_
 - REGISTRY_ACCOUNT=_yourDockerRegistryAccount_  
   * Note that this can be the account/registry URL for any valid Docker Registry
 - ACCOUNT_IDENTIFIER=shippable.$REGISTRY_ACCOUNT
   * No changes needed
-- AWS_DEPLOY_JSON=Dockerrun.aws.json.$ACCOUNT_IDENTIFIER.$AWS_EB_APPLICATION
-  * No changes needed
-- AWS_DOCKER_CONFIG=dockerconfig.$ACCOUNT_IDENTIFIER.$AWS_EB_APPLICATION
-  * No changes needed
-- secure variable 1: use the Shippable project settings page to encrypt your AWS_ACCESS_KEY_ID
-- secure variable 2: use the Shippable project settings page to encrypt your AWS_SECRET_ACCESS_KEY
