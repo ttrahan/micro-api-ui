@@ -25,7 +25,9 @@ This microservice uses info and error messages only.
 Before beginning, create a new application and environment in Elastic Beanstalk
 using [the instructions available here](https://aws.amazon.com/elasticbeanstalk/getting-started/).
 
-In the shippable.yml, change the following values, as needed, based on your EB application:
+In the shippable.yml, change the following values, as needed, based on your EB application.
+Note that these are optional as env variables and can be put in directly within the
+commands, as appropriate:
 - AWS_EB_APPLICATION:_yourElasticBeanstalkApplicationName_
 - AWS_EB_ENVIRONMENT=_yourElasticBeanstalkEnvironmentName_
 - REGISTRY_ACCOUNT=_yourDockerRegistryAccount_  
