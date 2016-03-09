@@ -1,0 +1,10 @@
+branch-defaults:
+  master:
+    environment: micro-api
+global:
+  application_name: aye0aye
+  default_ec2_keyname: null
+  default_platform: 64bit Amazon Linux 2015.09 v2.0.7 running Docker 1.9.1
+  default_region: us-east-1
+  profile: eb-cli
+  sc: git
